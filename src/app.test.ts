@@ -1,9 +1,9 @@
 import request from 'supertest';
-import app from './app.js';
+import app from './app';
 
 describe('Given an app', () => {
-  test('When the server is deployed, the app should respond with a message', async () => {
+  test('When the server starts, then the app should respond with a message', async () => {
     const res = await request(app).get('/');
-    expect(res.body).toEqual('Server ON');
+    expect(res.body).toEqual('Server is working!!');
   });
 });
