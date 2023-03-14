@@ -20,7 +20,6 @@ export const loginUserController: RequestHandler<
     const existingUser = await UserModel.findOne(filterUser).exec();
 
     if (existingUser === null) {
-      console.log('entro por aquí');
       return res.sendStatus(404);
     }
 
