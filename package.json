@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Huck8/202301-w8ch2-angel-contioso.git"
+    "url": "git+https://github.com/isdi-coders-2023/Angel-Contioso-Final-Project-back-202301-mal.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Huck8/202301-w8ch2-angel-contioso/issues"
+    "url": "https://github.com/isdi-coders-2023/Angel-Contioso-Final-Project-back-202301-mal.git/issues"
   },
-  "homepage": "https://github.com/Huck8/202301-w8ch2-angel-contioso#readme",
+  "homepage": "https://github.com/isdi-coders-2023/Angel-Contioso-Final-Project-back-202301-mal.git#readme",
   "devDependencies": {
     "@types/debug": "^4.1.7",
     "@types/jest": "^29.4.0",
