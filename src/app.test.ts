@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from './app';
+import app from './app.js';
 
 describe('Given an app', () => {
   test('When the server starts, then the app should respond with a message', async () => {
