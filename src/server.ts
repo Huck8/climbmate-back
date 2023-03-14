@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
-const express = require('express');
-const app = express();
 import log from './logger.js';
+import app from './app.js';
 
 dotenv.config();
 
