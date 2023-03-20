@@ -1,10 +1,10 @@
 import request from 'supertest';
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
-import connectDB from '../../database/connections.js';
-import app from '../../app.js';
-import { UserModel } from '../users/user-schema.js';
-import { encryptPassword } from './auth-utils.js';
+import connectDB from '../../database/connections';
+import app from '../../app';
+import { UserModel } from '../users/user-schema';
+import { encryptPassword } from './auth-utils';
 describe('Given an app with auth-router', () => {
   let mongoServer: MongoMemoryServer;
 
