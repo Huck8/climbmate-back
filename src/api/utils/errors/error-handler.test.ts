@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { ValidationError } from 'express-validation';
+import { CustomHTTPError } from './custom-http-error.js';
 
 import { errorHandler } from './error-handler.js';
 
@@ -47,6 +48,24 @@ describe('Given an errorHandler', () => {
     expect(mockResponse.status).toHaveBeenCalledWith(
       expectedResponse.statusCode,
     );
+    expect(nextFunction).not.toHaveBeenCalled();
+  });
+  test('When there is an error of type customHTTPError', () => {
+    const mockError = new CustomHTTPError(400, 'Custom error message');
+    const expectedResponse = {
+      httpCode: 400,
+      message: 'CustomHTTPError Error',
+      error: mockError.toBodyJSON,
+    };
+
+    errorHandler(
+      mockError,
+      mockRequest as Request,
+      mockResponse as Response,
+      nextFunction,
+    );
+
+    expect(mockResponse.status).toHaveBeenCalledWith(expectedResponse.httpCode);
     expect(nextFunction).not.toHaveBeenCalled();
   });
 });
