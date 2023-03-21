@@ -1,10 +1,17 @@
+import { authValidation, registerValidation } from './entry-validation.js';
 import express from 'express';
 // Aimport { validate } from 'express-validation';
-import { loginUserController } from './auth-controller.js';
-// Aimport authValidation from './auth-validation.js';
+import {
+  loginUserController,
+  registerUserController,
+} from './auth-controller.js';
+import { validate } from 'express-validation';
 
 const router = express.Router();
 
-router.route('/login').post(loginUserController);
+router
+  .route('/register')
+  .post(validate(registerValidation), registerUserController);
+router.route('/login').post(validate(authValidation), loginUserController);
 
 export default router;
