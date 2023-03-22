@@ -2,6 +2,7 @@ import mongoose, { Schema } from 'mongoose';
 // Aimport { User } from '../users/user-schema';
 
 export interface Excursion {
+  imgExcursion: string;
   nameExcursion: string;
   date: Date;
   difficultyLevel: string;
@@ -9,6 +10,7 @@ export interface Excursion {
 }
 
 const excursionSchema = new Schema<Excursion>({
+  imgExcursion: String,
   nameExcursion: String,
   date: Date,
   difficultyLevel: String,
