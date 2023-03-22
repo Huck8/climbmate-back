@@ -1,5 +1,5 @@
 import { RequestHandler } from 'express';
-import { UserRegistration, UserModel } from '../users/user-schema.js';
+import { UserModel, User } from '../users/user-schema.js';
 
 import { CustomHTTPError } from '../utils/errors/custom-http-error.js';
 import { AuthRequest, LoginResponse } from './auth-types.js';
@@ -46,7 +46,7 @@ export const registerUserController: RequestHandler<
     );
   }
 
-  const newUser: UserRegistration = {
+  const newUser: User = {
     name,
     email,
     password: encryptPassword(password),
