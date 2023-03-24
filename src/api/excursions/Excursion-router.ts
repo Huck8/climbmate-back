@@ -1,6 +1,6 @@
 import express from 'express';
 import { validate } from 'express-validation';
-import { authMiddleware } from '../auth/auth-middleware.js';
+
 import { excursionValidation } from '../auth/entry-validation.js';
 import {
   createExcursionController,
@@ -14,7 +14,6 @@ export const excursionRouter = express.Router();
 excursionRouter
   .route('/')
   .post(
-    authMiddleware,
     validate(excursionValidation),
     upload.single('excursion'),
     supabaseMiddleware,
