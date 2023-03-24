@@ -35,10 +35,10 @@ describe('Given an authMiddleware function', () => {
     );
   });
 
-  test('When a JWT token is provided and valid, then it should set res.locals.id and call next', () => {
-    const id = '123123j798GFsssswerfa';
+  test('When a JWT token is provided and valid, then it should set res.locals.email and call next', () => {
+    const email = 'angel@gmail.com';
     process.env.JWT_SECRET = 'secret';
-    const jwtToken = jwt.sign({ id }, process.env.JWT_SECRET!);
+    const jwtToken = jwt.sign({ email }, process.env.JWT_SECRET!);
     const mockReq = {
       headers: { authorization: `Bearer ${jwtToken}` },
     } as Request;
@@ -47,7 +47,7 @@ describe('Given an authMiddleware function', () => {
 
     authMiddleware(mockReq, mockRes, mockNext);
 
-    expect(mockRes.locals.id).toBe(id);
+    expect(mockRes.locals.email).toBe(email);
     expect(mockNext).toHaveBeenCalled();
   });
 });

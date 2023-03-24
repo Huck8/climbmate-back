@@ -18,3 +18,14 @@ export const registerValidation = {
       .required(),
   }),
 };
+
+export const excursionValidation = {
+  body: Joi.object({
+    imgExcursion: Joi.string(),
+    nameExcursion: Joi.string(),
+    date: Joi.date(),
+    needEquipment: Joi.string()
+      .regex(/[a-zA-Z0-9]{3,30}/)
+      .required(),
+  }),
+};
