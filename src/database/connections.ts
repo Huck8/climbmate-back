@@ -16,9 +16,3 @@ const connectDB = async (urlBD: string) => {
 };
 
 export default connectDB;
-
-// Import mongoose from 'mongoose';
-
-// const connectDB = (urlBD: string) => mongoose.connect(urlBD);
-
-// export default connectDB;
