@@ -24,8 +24,6 @@ export const excursionValidation = {
     imgExcursion: Joi.string(),
     nameExcursion: Joi.string(),
     date: Joi.date(),
-    needEquipment: Joi.string()
-      .regex(/[a-zA-Z0-9]{3,30}/)
-      .required(),
+    needEquipment: Joi.string().regex(/[a-zA-Z0-9]{3,30}/),
   }),
 };
