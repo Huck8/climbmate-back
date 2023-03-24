@@ -1,67 +1,79 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import { ExcursionModel } from './Excursion-schema';
 import {
   createExcursionController,
   getAllExcursionsController,
 } from './Excursion-controller';
-import { Excursion, ExcursionModel } from './Excursion-schema';
 
 describe('Given a controller to create excursions', () => {
+  const request = {
+    body: {
+      _id: new mongoose.Types.ObjectId('123456789123456789123456'),
+      nameExcursion: 'string',
+      date: Date,
+      difficultyLevel: 'string',
+      needEquipment: true,
+    },
+
+    imgExcursion: { buffer: Buffer.from('mockBuffer') },
+  } as Partial<Request>;
+
+  const response = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+    locals: {
+      email: 'example@example.com',
+    },
+  } as Partial<Response>;
+
+  describe('When the user wants to create his excursion', () => {
+    test('Then he should do it', async () => {
+      ExcursionModel.create = jest.fn().mockResolvedValue(request);
+
+      await createExcursionController(
+        request as Request,
+        response as Response,
+        jest.fn(),
+      );
+
+      expect(ExcursionModel.create).toHaveBeenCalledWith({
+        ...request.body,
+      });
+
+      expect(response.status).toHaveBeenCalledWith(201);
+    });
+  });
+});
+
+describe('Given a controller to get all excursions', () => {
+  const request = {} as Request;
+  const response = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  } as Partial<Response>;
   const next = jest.fn();
 
-  const request = {
-    _id: new mongoose.Types.ObjectId('123456789123456789123456'),
+  const excursion = {
     nameExcursion: 'Moclin',
     date: Date,
     difficultyLevel: 'Hard',
     needEquipment: 'true',
-  } as Partial<Request>;
-  const response = {
-    status: jest.fn().mockReturnThis(),
-    json: jest.fn(),
-  } as Partial<Response<Excursion[] | { msg: string }>>;
+  };
 
-  ExcursionModel.create = jest.fn().mockResolvedValue(response);
-
-  test('When the database response is successfull it, then it should respond with a message', async () => {
-    await createExcursionController(
-      request as Request,
-      response as Response,
-      next as NextFunction,
-    );
-
-    await expect(response.status).toHaveBeenCalledWith(201);
-  });
-
-  describe('Given a controller to get all projects', () => {
-    const mockRequest = {} as Partial<Request>;
-
-    const mockResponse = {
-      status: jest.fn().mockReturnThis(),
-      json: jest.fn(),
-    } as Partial<Response>;
-
-    const next = jest.fn();
-
-    const mockProjects = {
-      nameExcursion: 'Moclin',
-      date: Date,
-      difficultyLevel: 'Hard',
-      needEquipment: 'true',
-    };
-
-    test('when the database response is successful, the user should receive a list of projects', async () => {
-      ExcursionModel.find = jest
-        .fn()
-        .mockReturnValue({ exec: jest.fn().mockResolvedValue(mockProjects) });
+  describe('When the user wants get all business', () => {
+    test('Then should get all business', async () => {
+      ExcursionModel.find = jest.fn().mockImplementation(() => ({
+        exec: jest.fn().mockResolvedValue(excursion),
+      }));
 
       await getAllExcursionsController(
-        mockRequest as Request,
-        mockResponse as Response,
+        request as Request,
+        response as Response,
         next,
       );
 
-      expect(mockResponse.json).toHaveBeenCalledWith(mockProjects);
+      expect(response.json).toHaveBeenCalledWith(excursion);
     });
 
     test('when an error is thrown, it should be passed on to be handled', async () => {
@@ -70,8 +82,8 @@ describe('Given a controller to create excursions', () => {
         .mockReturnValue({ exec: jest.fn().mockRejectedValue(null) });
 
       await getAllExcursionsController(
-        mockRequest as Request,
-        mockResponse as Response,
+        request as Request,
+        response as Response,
         next,
       );
 

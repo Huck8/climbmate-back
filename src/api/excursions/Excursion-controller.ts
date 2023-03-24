@@ -2,19 +2,20 @@ import { RequestHandler } from 'express';
 
 import { Excursion, ExcursionModel } from './Excursion-schema.js';
 
+const queryProjection = { __v: 0 };
+
 export const createExcursionController: RequestHandler<
   unknown,
-  Excursion | { msg: string },
+  unknown,
   Excursion
 > = async (req, resp) => {
   const excursion: Excursion = {
     ...req.body,
+    imgExcursion: resp.locals.picture,
   };
   await ExcursionModel.create(excursion);
-  resp.status(201).json({ msg: 'Your excursion has been created!' });
+  resp.status(201).json(excursion);
 };
-
-const queryProjection = { __v: 0 };
 
 export const getAllExcursionsController: RequestHandler<
   unknown,
