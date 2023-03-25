@@ -19,14 +19,14 @@ export const createExcursionController: RequestHandler<
 
 export const getAllExcursionsController: RequestHandler<
   unknown,
-  Excursion[] | { msg: string }
+  { excursions: Excursion[] } | { msg: string }
 > = async (_req, res, next) => {
   try {
     const foundExcursions = await ExcursionModel.find(
       {},
       queryProjection,
     ).exec();
-    res.json(foundExcursions);
+    res.json({ excursions: foundExcursions });
   } catch (error) {
     next(error);
   }
