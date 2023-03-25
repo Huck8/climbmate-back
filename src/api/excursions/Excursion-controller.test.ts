@@ -54,15 +54,17 @@ describe('Given a controller to get all excursions', () => {
   } as Partial<Response>;
   const next = jest.fn();
 
-  const excursion = {
-    nameExcursion: 'Moclin',
-    date: Date,
-    difficultyLevel: 'Hard',
-    needEquipment: 'true',
-  };
+  const excursion = [
+    {
+      nameExcursion: 'Moclin',
+      date: Date,
+      difficultyLevel: 'Hard',
+      needEquipment: 'true',
+    },
+  ];
 
-  describe('When the user wants get all business', () => {
-    test('Then should get all business', async () => {
+  describe('When the user wants get all excursions', () => {
+    test('Then should get all excursions', async () => {
       ExcursionModel.find = jest.fn().mockImplementation(() => ({
         exec: jest.fn().mockResolvedValue(excursion),
       }));
@@ -73,7 +75,9 @@ describe('Given a controller to get all excursions', () => {
         next,
       );
 
-      expect(response.json).toHaveBeenCalledWith(excursion);
+      expect(response.json).toHaveBeenCalledWith({
+        excursions: excursion,
+      });
     });
 
     test('when an error is thrown, it should be passed on to be handled', async () => {
