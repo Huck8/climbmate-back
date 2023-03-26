@@ -7,6 +7,7 @@ export interface Excursion {
   date: Date;
   difficultyLevel: string;
   needEquipment: boolean;
+  creator: string;
 }
 
 const excursionSchema = new Schema<Excursion>({
@@ -15,6 +16,8 @@ const excursionSchema = new Schema<Excursion>({
   date: Date,
   difficultyLevel: String,
   needEquipment: Boolean,
+  creator: String,
+
   // Auser: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 

@@ -61,11 +61,18 @@ describe('Given an app with excursion-router', () => {
       // Const mockSupaBase = { file: { buffer: Buffer.from('mockedBuffer') } };
 
       const excursion: Excursion = {
+        // ImgExcursion: 'mockPicture.jpg.com',
+        // nameExcursion: 'Pirineo',
+        // date: new Date(),
+        // difficultyLevel: 'Hard',
+        // needEquipment: true,
+
         imgExcursion: 'mockPicture.jpg.com',
         nameExcursion: 'Pirineo',
         date: new Date(),
         difficultyLevel: 'Hard',
         needEquipment: true,
+        creator: 'Antonio Gamez',
       };
 
       await request(app)
@@ -79,11 +86,18 @@ describe('Given an app with excursion-router', () => {
   describe('When the user wants create his excursion', () => {
     test('Then it should receive a 401 error', async () => {
       const excursion: Excursion = {
+        // ImgExcursion: 'mockPicture.jpg.com',
+        // nameExcursion: 'Pirineo',
+        // date: new Date(),
+        // difficultyLevel: 'Hard',
+        // needEquipment: true,
+
         imgExcursion: 'mockPicture.jpg.com',
         nameExcursion: 'Pirineo',
         date: new Date(),
         difficultyLevel: 'Hard',
         needEquipment: true,
+        creator: 'Antonio Gamez',
       };
       await request(app).post('/api/v1/excursion').send(excursion).expect(401);
     });
