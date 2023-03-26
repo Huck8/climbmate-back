@@ -10,10 +10,16 @@ describe('Given a controller to create excursions', () => {
   const request = {
     body: {
       _id: new mongoose.Types.ObjectId('123456789123456789123456'),
+      // NameExcursion: 'string',
+      // date: Date,
+      // difficultyLevel: 'string',
+      // needEquipment: true,
+
       nameExcursion: 'string',
       date: Date,
       difficultyLevel: 'string',
       needEquipment: true,
+      creator: 'string',
     },
 
     imgExcursion: { buffer: Buffer.from('mockBuffer') },
@@ -56,10 +62,16 @@ describe('Given a controller to get all excursions', () => {
 
   const excursion = [
     {
+      // NameExcursion: 'Moclin',
+      // date: Date,
+      // difficultyLevel: 'Hard',
+      // needEquipment: 'true',
+
       nameExcursion: 'Moclin',
       date: Date,
       difficultyLevel: 'Hard',
       needEquipment: 'true',
+      creator: 'string',
     },
   ];
 
