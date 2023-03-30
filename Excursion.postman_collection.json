@@ -1,0 +1,92 @@
+{
+  "info": {
+    "_postman_id": "9c77f150-ca9c-4a58-8eed-db796e3b4aed",
+    "name": "Excursion",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25457116"
+  },
+  "item": [
+    {
+      "name": "http://localhost:4000/api/v1/Excursion",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFuZ2VsQGdtYWlsLmNvbSIsImlhdCI6MTY3OTU4MTQ1Mn0.tfFhRoABm2rZMdg_83PD8f2G_wDTpGxUpL_4FZp6qU4",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "excursion",
+              "type": "file",
+              "src": "/C:/Users/LENOVO/Desktop/post/norway.webp"
+            },
+            {
+              "key": "nameExcursion",
+              "value": "Kjerag",
+              "type": "text"
+            },
+            {
+              "key": "difficultyLevel",
+              "value": "Very Hard",
+              "type": "text"
+            },
+            {
+              "key": "needEquipment",
+              "value": "true",
+              "type": "text"
+            },
+            {
+              "key": "creator",
+              "value": "Paco Leyva",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:4000/api/v1/Excursion",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["api", "v1", "Excursion"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "http://localhost:4000/auth/login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "  {\r\n        \"email\": \"angel@gmail.com\",\r\n        \"password\": \"hola\"\r\n    }",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:4000/auth/login",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["auth", "login"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
