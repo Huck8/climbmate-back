@@ -4,7 +4,9 @@ import { ExcursionModel } from './Excursion-schema';
 import {
   createExcursionController,
   getAllExcursionsController,
+  getExcursionByIdController,
 } from './Excursion-controller';
+import { CustomHTTPError } from '../utils/errors/custom-http-error';
 
 describe('Given a controller to create excursions', () => {
   const request = {
@@ -104,6 +106,64 @@ describe('Given a controller to get all excursions', () => {
       );
 
       expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe('Given a getByIdcontroller business', () => {
+  const request = {
+    params: { id: 'mockId' },
+  } as Partial<Request>;
+  const response = {
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn(),
+  } as Partial<Response>;
+  const next = jest.fn();
+
+  const excursion = [
+    {
+      // NameExcursion: 'Moclin',
+      // date: Date,
+      // difficultyLevel: 'Hard',
+      // needEquipment: 'true',
+
+      nameExcursion: 'Moclin',
+      date: Date,
+      difficultyLevel: 'Hard',
+      needEquipment: 'true',
+      creator: 'string',
+    },
+  ];
+  ExcursionModel.findById = jest.fn().mockImplementation(() => ({
+    exec: jest.fn().mockResolvedValue(excursion),
+  }));
+
+  describe('When the user tries to search for a excursion by id', () => {
+    test('Then it should be found', async () => {
+      await getExcursionByIdController(
+        request as Request,
+        response as Response,
+        next,
+      );
+
+      expect(response.json).toHaveBeenCalledWith(excursion);
+      expect(response.status).toHaveBeenCalledWith(200);
+      expect(ExcursionModel.findById).toHaveBeenCalledWith('mockId');
+    });
+  });
+  describe('When the user tries to search  for a excursion by id and dont exist', () => {
+    test('Then it should recived a 404 error', async () => {
+      ExcursionModel.findById = jest.fn().mockImplementation(() => ({
+        exec: jest.fn().mockResolvedValue(null),
+      }));
+      await getExcursionByIdController(
+        request as Request,
+        response as Response,
+        next,
+      );
+      expect(next).toHaveBeenCalledWith(
+        new CustomHTTPError(404, 'The excursion does not exist'),
+      );
     });
   });
 });

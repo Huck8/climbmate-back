@@ -1,9 +1,14 @@
 import { RequestHandler } from 'express';
 
 import { Excursion, ExcursionModel } from './Excursion-schema.js';
+import { CustomHTTPError } from '../utils/errors/custom-http-error.js';
 
 const queryProjection = { __v: 0 };
-
+/**
+ *
+ * @param req
+ * @param resp
+ */
 export const createExcursionController: RequestHandler<
   unknown,
   unknown,
@@ -30,4 +35,19 @@ export const getAllExcursionsController: RequestHandler<
   } catch (error) {
     next(error);
   }
+};
+
+export const getExcursionByIdController: RequestHandler = async (
+  req,
+  res,
+  next,
+) => {
+  const { id } = req.params;
+
+  const excursion = await ExcursionModel.findById(id).exec();
+  if (excursion === null) {
+    return next(new CustomHTTPError(404, 'The excursion does not exist'));
+  }
+
+  res.status(200).json(excursion);
 };
