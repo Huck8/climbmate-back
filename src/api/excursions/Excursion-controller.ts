@@ -4,7 +4,11 @@ import { Excursion, ExcursionModel } from './Excursion-schema.js';
 import { CustomHTTPError } from '../utils/errors/custom-http-error.js';
 
 const queryProjection = { __v: 0 };
-
+/**
+ *
+ * @param req
+ * @param resp
+ */
 export const createExcursionController: RequestHandler<
   unknown,
   unknown,
