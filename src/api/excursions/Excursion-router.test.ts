@@ -71,7 +71,7 @@ describe('Given an app with excursion-router', () => {
         nameExcursion: 'Pirineo',
         date: new Date(),
         difficultyLevel: 'Hard',
-        needEquipment: true,
+        equipment: 'Yes',
         creator: 'Antonio Gamez',
       };
 
@@ -96,7 +96,7 @@ describe('Given an app with excursion-router', () => {
         nameExcursion: 'Pirineo',
         date: new Date(),
         difficultyLevel: 'Hard',
-        needEquipment: true,
+        equipment: 'yes',
         creator: 'Antonio Gamez',
       };
       await request(app).post('/api/v1/excursion').send(excursion).expect(401);

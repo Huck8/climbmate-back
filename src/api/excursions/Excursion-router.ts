@@ -5,6 +5,7 @@ import { excursionValidation } from '../auth/entry-validation.js';
 import {
   createExcursionController,
   getAllExcursionsController,
+  getExcursionByIdController,
 } from './Excursion-controller.js';
 import { upload } from './image-upload-middleware.js';
 import { supabaseMiddleware } from './supabase-middleware.js';
@@ -20,3 +21,5 @@ excursionRouter
     createExcursionController,
   )
   .get(getAllExcursionsController);
+
+excursionRouter.route('/:id').get(getExcursionByIdController);
